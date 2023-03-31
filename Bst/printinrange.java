@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class printinrange {
     static class Node{
         int data;
@@ -59,6 +61,28 @@ public static Node insert(Node root , int val)
         }
        
     }
+    public static void printPath(ArrayList<Integer> path)
+    {
+        for(int i=0; i<path.size(); i++)
+        {
+            System.out.print(path.get(i) +"->");
+        }
+        System.out.println("Null");
+    }
+    public static void printroot2leaf(Node root, ArrayList<Integer> path)
+    {   if(root==null){
+        return;
+
+    }
+        path.add(root.data);
+        if(root.left==null && root.right==null)
+        {
+            printPath(path);
+        }
+        printroot2leaf(root.left, path);
+        printroot2leaf(root.right, path);
+        path.remove(path.size()-1);
+    }
     public static void main(String[] args) {
         int value[]={8,5,3,1,4,6,10,11,14};
         Node root=null;
@@ -68,7 +92,8 @@ public static Node insert(Node root , int val)
         }
         inorder(root);
         System.out.println();
-        printInrange(root, 5, 20);
+        // printInrange(root, 5, 20);
+        printroot2leaf(root,new ArrayList<>());
        
     
     }
